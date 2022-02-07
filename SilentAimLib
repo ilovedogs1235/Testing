@@ -45,6 +45,10 @@ function SA:FovCircle(x)
     _G.CircleVisible1 = x
 end
 
+function SA:ToggleCircle()
+    _G.CircleVisible1 = not _G.CircleVisible1
+end
+
 function SA:getClosestPlrToMouse()
     local target = nil
     local maxDist = math.huge
