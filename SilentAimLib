@@ -1,3 +1,9 @@
+local runservice = game:GetService("RunService")
+local plrs = game:GetService("Players")
+local plr = plrs.LocalPlayer
+local camera = game:GetService("Workspace").CurrentCamera
+local mouse = plr:GetMouse()
+
 local SA = {}
 
 function VisCheck(target)
@@ -15,6 +21,28 @@ function VisCheck(target)
             end
         end
     end
+end
+
+pcall(function()
+    _G.CircleVisible1 = false
+    local mouse = game.Players.LocalPlayer:GetMouse()
+    local circle_ = Drawing.new("Circle")
+    circle_.Transparency = 0.7
+    circle_.Filled = false
+    circle_.Thickness = 3
+    circle_.NumSides = 64
+    circle_.Radius = 250
+    circle_.Color = Color3.fromRGB(255, 0, 0)
+    coroutine.resume(coroutine.create(function()
+        game:GetService("RunService").RenderStepped:connect(function()
+            circle_.Visible = _G.CircleVisible1
+            circle_.Position = Vector2.new(mouse.X, mouse.Y + 40)
+        end)
+    end))
+end)
+
+function SA:FovCircle(x)
+    _G.CircleVisible1 = x
 end
 
 function SA:getClosestPlrToMouse()
